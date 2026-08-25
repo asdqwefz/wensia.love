@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="wensia.love - Personal Profile">
+    <title>💕 wensia.love 💕</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Enter Screen Overlay -->
+    <div id="enterScreen" class="enter-screen">
+        <div class="enter-content">
+            <div class="enter-couple">
+                <span class="enter-name">crownes</span>
+                <span class="enter-heart" aria-hidden="true">
+                    <i class="fas fa-heart"></i>
+                </span>
+                <span class="enter-name">wensia</span>
+            </div>
+            <p class="enter-subtext">click to enter</p>
+        </div>
+    </div>
+
+    <!-- Animated Background Particles -->
+    <div class="bg-particles" id="particles"></div>
+
+    <!-- Cursor Trail -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <main class="container">
+        <header class="couple-title">
+            <span class="couple-name">crownes</span>
+            <span class="couple-heart" aria-hidden="true">
+                <i class="fas fa-heart"></i>
+            </span>
+            <span class="couple-name">wensia</span>
+        </header>
+
+        <!-- Profile Card 1 -->
+        <div class="profile-card" id="card1" data-discord-id="216738682852343818">
+            <div class="card-glow"></div>
+            <div class="card-inner">
+                <!-- Avatar Section -->
+                <div class="avatar-section">
+                    <div class="avatar-ring">
+                        <div class="avatar-ring-glow"></div>
+                        <img class="avatar-img" id="avatar1" src="https://cdn.discordapp.com/embed/avatars/0.png"
+                            alt="Avatar" loading="lazy">
+                        <div class="status-indicator" id="status1" data-status="offline">
+                            <div class="status-pulse"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom Status Pill -->
+                <div class="custom-status" id="customStatus1">
+                    <span class="status-emoji"></span>
+                    <span class="status-text"></span>
+                </div>
+
+                <!-- User Info -->
+                <div class="user-info">
+                    <h2 class="display-name" id="displayName1">Yükleniyor...</h2>
+                    <p class="username" id="username1">@...</p>
+
+                    <!-- Social Links -->
+                    <div class="social-links">
+                        <a href="#" id="pinterest1" target="_blank" rel="noopener" aria-label="Pinterest"
+                            class="social-btn">
+                            <i class="fab fa-pinterest-p"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Spotify Activity -->
+                <div class="spotify-section" id="spotify1">
+                    <div class="spotify-header">
+                        <i class="fab fa-spotify"></i>
+                        <span>Spotify'da Dinliyor</span>
+                    </div>
+                    <div class="spotify-content">
+                        <img class="spotify-album" id="spotifyAlbum1"
+                            src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png"
+                            alt="Album">
+                        <div class="spotify-info">
+                            <p class="spotify-track" id="spotifyTrack1">Discord Bağlanıyor...</p>
+                            <p class="spotify-artist" id="spotifyArtist1">Canlı durum verisi çekiliyor</p>
+                        </div>
+                    </div>
+                    <div class="spotify-progress">
+                        <div class="spotify-bar">
+                            <div class="spotify-bar-fill" id="spotifyBar1" style="width: 0%;"></div>
+                        </div>
+                        <div class="spotify-times">
+                            <span id="spotifyElapsed1">0:00</span>
+                            <span id="spotifyTotal1">0:00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Activity -->
+                <div class="activity-section" id="activity1" style="display: none;">
+                    <div class="activity-header">
+                        <i class="fas fa-gamepad"></i>
+                        <span>Bir Aktivite Oynuyor</span>
+                    </div>
+                    <div class="activity-content">
+                        <img class="activity-image" id="activityImg1" src="" alt="Activity">
+                        <div class="activity-info">
+                            <p class="activity-name" id="activityName1"></p>
+                            <p class="activity-details" id="activityDetails1"></p>
+                            <p class="activity-state" id="activityState1"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Heart Divider -->
+        <div class="heart-divider">
+            <div class="heart-beat">
+                <i class="fas fa-heart"></i>
+            </div>
+            <div class="connection-line"></div>
+        </div>
+
+        <!-- Profile Card 2 -->
+        <div class="profile-card" id="card2" data-discord-id="287243601262542849">
+            <div class="card-glow"></div>
+            <div class="card-inner">
+                <!-- Avatar Section -->
+                <div class="avatar-section">
+                    <div class="avatar-ring">
+                        <div class="avatar-ring-glow"></div>
+                        <img class="avatar-img" id="avatar2" src="https://cdn.discordapp.com/embed/avatars/1.png"
+                            alt="Avatar" loading="lazy">
+                        <div class="status-indicator" id="status2" data-status="offline">
+                            <div class="status-pulse"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom Status Pill -->
+                <div class="custom-status" id="customStatus2">
+                    <span class="status-emoji"></span>
+                    <span class="status-text"></span>
+                </div>
+
+                <!-- User Info -->
+                <div class="user-info">
+                    <h2 class="display-name" id="displayName2">Yükleniyor...</h2>
+                    <p class="username" id="username2">@...</p>
+
+                    <!-- Social Links -->
+                    <div class="social-links">
+                        <a href="#" id="pinterest2" target="_blank" rel="noopener" aria-label="Pinterest"
+                            class="social-btn">
+                            <i class="fab fa-pinterest-p"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Spotify Activity -->
+                <div class="spotify-section" id="spotify2">
+                    <div class="spotify-header">
+                        <i class="fab fa-spotify"></i>
+                        <span>Spotify'da Dinliyor</span>
+                    </div>
+                    <div class="spotify-content">
+                        <img class="spotify-album" id="spotifyAlbum2"
+                            src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png"
+                            alt="Album">
+                        <div class="spotify-info">
+                            <p class="spotify-track" id="spotifyTrack2">Discord Bağlanıyor...</p>
+                            <p class="spotify-artist" id="spotifyArtist2">Canlı durum verisi çekiliyor</p>
+                        </div>
+                    </div>
+                    <div class="spotify-progress">
+                        <div class="spotify-bar">
+                            <div class="spotify-bar-fill" id="spotifyBar2" style="width: 0%;"></div>
+                        </div>
+                        <div class="spotify-times">
+                            <span id="spotifyElapsed2">0:00</span>
+                            <span id="spotifyTotal2">0:00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Activity -->
+                <div class="activity-section" id="activity2" style="display: none;">
+                    <div class="activity-header">
+                        <i class="fas fa-gamepad"></i>
+                        <span>Bir Aktivite Oynuyor</span>
+                    </div>
+                    <div class="activity-content">
+                        <img class="activity-image" id="activityImg2" src="" alt="Activity">
+                        <div class="activity-info">
+                            <p class="activity-name" id="activityName2"></p>
+                            <p class="activity-details" id="activityDetails2"></p>
+                            <p class="activity-state" id="activityState2"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Together since 01.01.2026 00:00 (Istanbul) -->
+        <section class="together-counter" aria-label="Birlikte geçen süre">
+            <div class="together-units">
+                <div class="together-unit">
+                    <span class="together-value" id="tMonths">0</span>
+                    <span class="together-key">ay</span>
+                </div>
+                <div class="together-sep"></div>
+                <div class="together-unit">
+                    <span class="together-value" id="tDays">0</span>
+                    <span class="together-key">gün</span>
+                </div>
+                <div class="together-sep"></div>
+                <div class="together-unit">
+                    <span class="together-value" id="tHours">0</span>
+                    <span class="together-key">saat</span>
+                </div>
+                <div class="together-sep"></div>
+                <div class="together-unit">
+                    <span class="together-value" id="tMinutes">0</span>
+                    <span class="together-key">dk</span>
+                </div>
+                <div class="together-sep"></div>
+                <div class="together-unit">
+                    <span class="together-value" id="tSeconds">0</span>
+                    <span class="together-key">sn</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Hidden YouTube Player -->
+    <div id="youtubePlayer" style="display: none;"></div>
+
+    <!-- Global Music Player (Custom) -->
+    <div class="music-player" id="musicPlayer">
+        <div class="player-left">
+            <img src="" alt="Cover" class="player-cover" id="playerCover">
+            <div class="player-info">
+                <div class="player-title" id="playerTitle">Yükleniyor...</div>
+                <div class="player-artist" id="playerArtist">Lütfen bekleyin</div>
+            </div>
+        </div>
+
+        <div class="player-right">
+            <button class="player-btn play-btn" id="playBtn" aria-label="Play/Pause">
+                <i class="fas fa-play" id="playIcon"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- YouTube IFrame API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
