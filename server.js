@@ -1,25 +1,16 @@
-/* ==========================================
-   WENSIA.LOVE - Discord Gateway + REST API Server
-   Fetches User Profile + Real-Time Presence & Spotify
-   via Discord Bot Gateway (NO Lanyard)
-   ========================================== */
-
 const http = require('http');
 const https = require('https');
 const url = require('url');
 const WebSocket = require('ws');
 
-// ─── BOT TOKEN AYARI ───
 const BOT_TOKEN = process.env.DISCORD_BOT_TOKEN || '';
 
-// Hedef Discord Kullanıcı ID'leri
 const DISCORD_IDS = ['216738682852343818', '287243601262542849'];
 
 const PORT = Number(process.env.PORT) || 5500;
 const HOST = process.env.HOST || '0.0.0.0';
 const API_ONLY = process.env.API_ONLY === '1' || process.env.API_ONLY === 'true';
 
-// ─── PRESENCE CACHE ───
 const presenceCache = {};
 DISCORD_IDS.forEach(id => {
     presenceCache[id] = {
@@ -31,7 +22,6 @@ DISCORD_IDS.forEach(id => {
     };
 });
 
-// ─── DISCORD REST API - USER PROFILE ───
 function fetchDiscordUser(userId) {
     return new Promise((resolve, reject) => {
         if (!BOT_TOKEN) return reject(new Error('Token yok'));
@@ -76,12 +66,10 @@ function fetchDiscordUser(userId) {
     });
 }
 
-// ─── PARSE PRESENCE DATA FROM GATEWAY ───
 function parsePresence(presenceData) {
     const status = presenceData.status || 'offline';
     const activities = presenceData.activities || [];
 
-    // Custom Status (Type 4)
     let customStatusText = null;
     let customStatusEmoji = null;
     const customAct = activities.find(a => a.type === 4);
@@ -90,11 +78,9 @@ function parsePresence(presenceData) {
         if (customAct.emoji) customStatusEmoji = customAct.emoji.name || null;
     }
 
-    // Spotify Activity (Type 2, name === 'Spotify')
     let spotifyData = null;
     const spotifyAct = activities.find(a => a.type === 2 && a.name === 'Spotify');
     if (spotifyAct) {
-        // Album art from assets
         let albumArt = null;
         if (spotifyAct.assets && spotifyAct.assets.large_image) {
             const img = spotifyAct.assets.large_image;
@@ -123,7 +109,6 @@ function parsePresence(presenceData) {
     };
 }
 
-// ─── DISCORD GATEWAY (WEBSOCKET) CONNECTION ───
 let gatewayWs = null;
 let heartbeatInterval = null;
 let lastSequence = null;
@@ -163,27 +148,22 @@ function connectGateway() {
 
         const { op, d, s, t } = payload;
 
-        // Update sequence number
         if (s !== null) lastSequence = s;
 
         switch (op) {
-            // Dispatch
             case 0:
                 handleDispatch(t, d);
                 break;
 
-            // Heartbeat Request
             case 1:
                 sendHeartbeat();
                 break;
 
-            // Reconnect
             case 7:
                 console.log('[Gateway] Sunucu yeniden baglanma istedi');
                 gatewayWs.close(4000, 'Reconnect requested');
                 break;
 
-            // Invalid Session
             case 9:
                 console.log('[Gateway] Gecersiz oturum, yeniden identify ediliyor...');
                 sessionId = null;
@@ -191,21 +171,17 @@ function connectGateway() {
                 setTimeout(() => sendIdentify(), 2000);
                 break;
 
-            // Hello
             case 10:
                 console.log('[Gateway] Hello alindi, heartbeat baslatiyor...');
                 startHeartbeat(d.heartbeat_interval);
                 
                 if (sessionId && lastSequence !== null) {
-                    // Resume
                     sendResume();
                 } else {
-                    // Fresh identify
                     sendIdentify();
                 }
                 break;
 
-            // Heartbeat ACK
             case 11:
                 break;
         }
@@ -216,14 +192,12 @@ function connectGateway() {
         stopHeartbeat();
         isReconnecting = false;
 
-        // Don't reconnect on certain close codes
         const noReconnectCodes = [4004, 4010, 4011, 4012, 4013, 4014];
         if (noReconnectCodes.includes(code)) {
             console.error('[Gateway] Kalici hata, yeniden baglanilmayacak');
             return;
         }
 
-        // Reconnect after delay
         setTimeout(connectGateway, 5000);
     });
 
@@ -234,7 +208,6 @@ function connectGateway() {
 }
 
 function sendIdentify() {
-    // Intents: GUILDS (1<<0) | GUILD_PRESENCES (1<<8) | GUILD_MEMBERS (1<<15)
     const intents = (1 << 0) | (1 << 8) | (1 << 15);
 
     const identifyPayload = {
@@ -271,7 +244,6 @@ function sendResume() {
 function startHeartbeat(interval) {
     stopHeartbeat();
     
-    // Send first heartbeat after jitter
     const jitter = Math.random();
     setTimeout(() => {
         sendHeartbeat();
@@ -292,7 +264,6 @@ function sendHeartbeat() {
     }
 }
 
-// ─── DISPATCH EVENT HANDLER ───
 function handleDispatch(eventName, data) {
     switch (eventName) {
         case 'READY':
@@ -303,7 +274,6 @@ function handleDispatch(eventName, data) {
             break;
 
         case 'GUILD_CREATE':
-            // Initial guild data includes presences
             if (data.presences) {
                 data.presences.forEach(presence => {
                     const userId = presence.user?.id;
@@ -330,14 +300,11 @@ function handleDispatch(eventName, data) {
     }
 }
 
-// Start Gateway connection
 connectGateway();
 
-// ─── LOCAL SERVER ───
 const server = http.createServer(async (req, res) => {
     const parsedUrl = url.parse(req.url, true);
 
-    // CORS Headers
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -368,7 +335,7 @@ const server = http.createServer(async (req, res) => {
                         status: presence.status || 'offline',
                         customStatusText: presence.customStatusText,
                         customStatusEmoji: presence.customStatusEmoji,
-                        spotify: presence.spotify // null if not listening
+                        spotify: presence.spotify
                     };
                 })
             );
@@ -387,7 +354,6 @@ const server = http.createServer(async (req, res) => {
         return;
     }
 
-    // Statik Dosyalar (HTML, CSS, JS)
     const fs = require('fs');
     const path = require('path');
 
