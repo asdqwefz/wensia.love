@@ -1,12 +1,5 @@
-/* ==========================================
-   WENSIA.LOVE - Main Engine
-   Combines CONFIG + Official Discord API + Real-Time Presence & Spotify
-   ========================================== */
-
-// Spotify live progress timers
 const spotifyTimers = {};
 
-// Music playlist for bottom audio bar
 const PLAYLIST = [
     {
         title: 'Her şey senle güzel',
@@ -17,7 +10,6 @@ const PLAYLIST = [
     }
 ];
 
-// ─── PARTICLES ───
 function createParticles() {
     const container = document.getElementById('particles');
     if (!container) return;
@@ -38,7 +30,6 @@ function createParticles() {
     }
 }
 
-// ─── CURSOR GLOW ───
 function initCursorGlow() {
     const glow = document.getElementById('cursorGlow');
     if (!glow) return;
@@ -60,28 +51,23 @@ function initCursorGlow() {
     animateGlow();
 }
 
-// ─── RENDER INITIAL CONFIG PROFILES ───
 function renderConfigProfiles() {
     const profiles = [CONFIG.profile1, CONFIG.profile2];
 
     profiles.forEach((p, i) => {
         const index = i + 1;
 
-        // Avatar
         const avatarEl = document.getElementById(`avatar${index}`);
         if (avatarEl && p.avatar) avatarEl.src = p.avatar;
 
-        // Status indicator
         const statusEl = document.getElementById(`status${index}`);
         if (statusEl && p.status) statusEl.dataset.status = p.status;
 
-        // Display Name & Username
         const displayNameEl = document.getElementById(`displayName${index}`);
         const usernameEl = document.getElementById(`username${index}`);
         if (displayNameEl && p.displayName) displayNameEl.textContent = p.displayName;
         if (usernameEl && p.username) usernameEl.textContent = p.username;
 
-        // Custom status badge
         const customStatusEl = document.getElementById(`customStatus${index}`);
         if (customStatusEl && p.customStatusText) {
             customStatusEl.classList.add('active');
@@ -91,19 +77,16 @@ function renderConfigProfiles() {
             if (textSpan) textSpan.textContent = p.customStatusText;
         }
 
-        // Social links from config
         if (p.socials) {
             const pinterestEl = document.getElementById(`pinterest${index}`);
             if (pinterestEl && p.socials.pinterest) pinterestEl.href = p.socials.pinterest;
         }
 
-        // Spotify - hide by default (will be shown by live Discord data)
         const spotifyEl = document.getElementById(`spotify${index}`);
         if (spotifyEl) spotifyEl.style.display = 'none';
     });
 }
 
-// ─── LIVE DISCORD VIA LANYARD (works on GitHub Pages) ───
 function applyLiveUser(user, index) {
     if (!user || index < 1) return;
 
@@ -263,11 +246,9 @@ function updateSpotifyProgress(index, timestamps) {
     spotifyTimers[index] = setInterval(update, 1000);
 }
 
-// ─── MUSIC PLAYER (BOTTOM PLAYER CONTROLS VIA YOUTUBE) ───
 let ytPlayer;
 let musicPlayerInstance;
 
-// This function is called by the YouTube IFrame API once it's loaded
 function onYouTubeIframeAPIReady() {
     ytPlayer = new YT.Player('youtubePlayer', {
         height: '0',
@@ -290,7 +271,6 @@ function onYouTubeIframeAPIReady() {
 }
 
 function onPlayerReady(event) {
-    // Kısık ses için ses seviyesini 30'a ayarladık (0-100 arası)
     event.target.setVolume(30);
 
     if (musicPlayerInstance) {
@@ -359,7 +339,6 @@ class MusicPlayer {
     }
 }
 
-// ─── UTILS ───
 function formatTime(ms) {
     if (isNaN(ms) || ms < 0) return '0:00';
     const totalSeconds = Math.floor(ms / 1000);
@@ -368,7 +347,6 @@ function formatTime(ms) {
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 }
 
-// ─── CARD TILT EFFECT ───
 function initCardTilt() {
     if (window.matchMedia('(hover: none), (pointer: coarse)').matches) return;
 
@@ -392,7 +370,6 @@ function initCardTilt() {
     });
 }
 
-// ─── TOGETHER COUNTER (Istanbul, 01.01.2026 00:00) ───
 const COUNTER_TZ = 'Europe/Istanbul';
 const COUNTER_START = { y: 2026, m: 1, d: 1, h: 0, min: 0, s: 0 };
 
@@ -480,7 +457,6 @@ function initTogetherCounter() {
     setInterval(renderTogetherCounter, 1000);
 }
 
-// ─── INIT ON LOAD ───
 document.addEventListener('DOMContentLoaded', () => {
     createParticles();
     initCursorGlow();
@@ -493,18 +469,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     musicPlayerInstance = new MusicPlayer();
 
-    // Enter Screen Logic
     const enterScreen = document.getElementById('enterScreen');
     if (enterScreen) {
         enterScreen.addEventListener('click', () => {
             enterScreen.classList.add('hidden');
             
-            // Try to play music if ready, else it will just be ready to play later
             if (musicPlayerInstance && !musicPlayerInstance.isPlaying) {
                 musicPlayerInstance.togglePlay();
             }
             
-            // Remove from DOM after fade out to avoid blocking clicks
             setTimeout(() => {
                 enterScreen.remove();
             }, 800);
