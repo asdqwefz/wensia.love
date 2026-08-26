@@ -15,7 +15,9 @@ const BOT_TOKEN = process.env.DISCORD_BOT_TOKEN || '';
 // Hedef Discord Kullanıcı ID'leri
 const DISCORD_IDS = ['216738682852343818', '287243601262542849'];
 
-const PORT = 5500;
+const PORT = Number(process.env.PORT) || 5500;
+const HOST = process.env.HOST || '0.0.0.0';
+const API_ONLY = process.env.API_ONLY === '1' || process.env.API_ONLY === 'true';
 
 // ─── PRESENCE CACHE ───
 const presenceCache = {};
@@ -346,6 +348,12 @@ const server = http.createServer(async (req, res) => {
         return;
     }
 
+    if (parsedUrl.pathname === '/api/health') {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ ok: true, gateway: Boolean(BOT_TOKEN) }));
+        return;
+    }
+
     if (parsedUrl.pathname === '/api/users') {
         try {
             const results = await Promise.all(
@@ -370,6 +378,12 @@ const server = http.createServer(async (req, res) => {
             res.writeHead(500, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ success: false, error: error.message }));
         }
+        return;
+    }
+
+    if (API_ONLY) {
+        res.writeHead(404, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, error: 'Not found' }));
         return;
     }
 
@@ -403,10 +417,13 @@ const server = http.createServer(async (req, res) => {
     });
 });
 
-server.listen(PORT, () => {
+server.listen(PORT, HOST, () => {
+    if (!BOT_TOKEN) {
+        console.warn('[UYARI] DISCORD_BOT_TOKEN yok. Presence calismaz.');
+    }
     console.log(`\n==================================================`);
-    console.log(`🚀 WENSIA.LOVE Sunucusu Calisiyot! (Port ${PORT})`);
-    console.log(`🌐 Adres: http://localhost:${PORT}`);
-    console.log(`📡 Discord Gateway: Bot Presence ile Spotify verisi`);
+    console.log(`WENSIA.LOVE bot API calisiyor (${HOST}:${PORT})`);
+    console.log(`API: http://${HOST}:${PORT}/api/users`);
+    console.log(`Mod: ${API_ONLY ? 'sadece API (GitHub Pages icin)' : 'API + statik site'}`);
     console.log(`==================================================\n`);
 });

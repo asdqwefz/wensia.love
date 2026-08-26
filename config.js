@@ -33,5 +33,10 @@ const CONFIG = {
         }
     },
 
+    // Bot sunucusunun adresi (GitHub Pages buraya istek atar).
+    // Railway/Render/VPS URL'sini buraya yaz, sonda / olmasın.
+    // Örnek: 'https://wensia-bot.up.railway.app'
+    apiUrl: '',
+
     useLiveDiscord: true
 };

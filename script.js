@@ -190,11 +190,39 @@ function mapLanyardUser(data) {
     };
 }
 
+function getPresenceApiUrl() {
+    const configured = String(CONFIG.apiUrl || '').trim().replace(/\/$/, '');
+    if (configured) return `${configured}/api/users`;
+
+    const host = location.hostname;
+    if (host === 'localhost' || host === '127.0.0.1') return '/api/users';
+    return '';
+}
+
 async function fetchOfficialDiscordUsers() {
     if (CONFIG.useLiveDiscord === false) return;
 
-    const ids = [CONFIG.profile1.discordId, CONFIG.profile2.discordId];
+    const apiUrl = getPresenceApiUrl();
+    if (apiUrl) {
+        try {
+            const res = await fetch(apiUrl);
+            if (res.ok) {
+                const json = await res.json();
+                if (json.success && Array.isArray(json.users)) {
+                    const ids = [CONFIG.profile1.discordId, CONFIG.profile2.discordId];
+                    json.users.forEach((user) => {
+                        const index = ids.indexOf(user.id) + 1;
+                        if (index > 0) applyLiveUser(user, index);
+                    });
+                    return;
+                }
+            }
+        } catch (e) {
+            console.warn('[Discord bot] API ulasilamadi, Lanyard yedegi deneniyor');
+        }
+    }
 
+    const ids = [CONFIG.profile1.discordId, CONFIG.profile2.discordId];
     await Promise.all(ids.map(async (id, i) => {
         try {
             const res = await fetch(`https://api.lanyard.rest/v1/users/${id}`);
