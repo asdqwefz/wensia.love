@@ -8,12 +8,11 @@ const CONFIG = {
     // 1. Profil (Sol Taraf)
     profile1: {
         discordId: '216738682852343818',
-        displayName: 'iovebf',
-        username: '@toxicluvs',
-        avatar: 'https://i.ibb.co/L5wKx2d/avatar1.jpg', // veya kendi resim linkin / dosya yolun
+        displayName: 'crownes',
+        username: '@crownesxd',
+        avatar: 'https://media.discordapp.net/attachments/1468015739737739494/1541925463008612483/29db5b0552d85ee78c7b6beffcd97d5f.jpg?ex=6a8f5d7d&is=6a8e0bfd&hm=a0012bbdccdcfc45b986ffb02582f0fadbeea7def9e3653c8f277ae573c13b8c&=&format=webp', // veya kendi resim linkin / dosya yolun
         status: 'online', // 'online', 'idle', 'dnd', 'offline'
-        customStatusText: 'alacati', // Fotoğraftaki durum balonu
-        customStatusEmoji: '✨',
+        customStatusText: 'professional', // Fotoğraftaki durum balonu
         socials: {
             pinterest: 'https://www.pinterest.com/crownesxd/'
         }
@@ -23,11 +22,10 @@ const CONFIG = {
     profile2: {
         discordId: '287243601262542849',
         displayName: 'wensia',
-        username: '@wensia',
-        avatar: 'https://i.ibb.co/M9KzM5n/avatar2.jpg', // veya kendi resim linkin / dosya yolun
+        username: '@toxicluvs',
+        avatar: 'https://media.discordapp.net/attachments/1468015739737739494/1541925463008612483/29db5b0552d85ee78c7b6beffcd97d5f.jpg?ex=6a8f5d7d&is=6a8e0bfd&hm=a0012bbdccdcfc45b986ffb02582f0fadbeea7def9e3653c8f277ae573c13b8c&=&format=webp', // veya kendi resim linkin / dosya yolun
         status: 'online',
-        customStatusText: 'wensia',
-        customStatusEmoji: '💕',
+        customStatusText: 'vanilya',
         socials: {
             pinterest: 'https://www.pinterest.com/pinnershin/'
         }
