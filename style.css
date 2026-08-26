@@ -1,6 +1,3 @@
-/* ==========================================
-   CSS VARIABLES & RESET
-   ========================================== */
 :root {
     --bg-primary: #0a0a0f;
     --bg-secondary: #12121a;
@@ -63,9 +60,6 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
-/* ==========================================
-   ENTER SCREEN
-   ========================================== */
 .enter-screen {
     position: fixed;
     inset: 0;
@@ -143,9 +137,6 @@ body {
     50% { opacity: 1; }
 }
 
-/* ==========================================
-   BACKGROUND PARTICLES
-   ========================================== */
 .bg-particles {
     position: fixed;
     top: 0;
@@ -184,9 +175,6 @@ body {
     }
 }
 
-/* ==========================================
-   CURSOR GLOW
-   ========================================== */
 .cursor-glow {
     position: fixed;
     width: 400px;
@@ -200,9 +188,6 @@ body {
     will-change: left, top;
 }
 
-/* ==========================================
-   MAIN CONTAINER
-   ========================================== */
 .container {
     position: relative;
     z-index: 2;
@@ -216,9 +201,6 @@ body {
     gap: 0;
 }
 
-/* ==========================================
-   COUPLE TITLE
-   ========================================== */
 .couple-title {
     flex: 1 1 100%;
     display: flex;
@@ -251,9 +233,6 @@ body {
     align-items: center;
 }
 
-/* ==========================================
-   PROFILE CARD
-   ========================================== */
 .profile-card {
     position: relative;
     width: 100%;
@@ -312,9 +291,6 @@ body {
     pointer-events: none;
 }
 
-/* ==========================================
-   AVATAR
-   ========================================== */
 .avatar-section {
     display: flex;
     justify-content: center;
@@ -408,9 +384,6 @@ body {
     50% { opacity: 0.28; transform: scale(1.25); }
 }
 
-/* ==========================================
-   CUSTOM STATUS
-   ========================================== */
 .custom-status {
     display: none;
     align-items: center;
@@ -436,9 +409,6 @@ body {
     height: 18px;
 }
 
-/* ==========================================
-   USER INFO
-   ========================================== */
 .user-info {
     text-align: center;
     margin-bottom: 20px;
@@ -465,9 +435,6 @@ body {
     margin-bottom: 12px;
 }
 
-/* ==========================================
-   SOCIAL LINKS
-   ========================================== */
 .social-links {
     display: flex;
     gap: 12px;
@@ -497,9 +464,6 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* ==========================================
-   SPOTIFY SECTION
-   ========================================== */
 .spotify-section {
     background: rgba(30, 215, 96, 0.06);
     border: 1px solid rgba(30, 215, 96, 0.12);
@@ -596,9 +560,6 @@ body {
     margin-top: 4px;
 }
 
-/* ==========================================
-   ACTIVITY SECTION
-   ========================================== */
 .activity-section {
     background: rgba(107, 138, 255, 0.06);
     border: 1px solid rgba(107, 138, 255, 0.12);
@@ -652,9 +613,6 @@ body {
     text-overflow: ellipsis;
 }
 
-/* ==========================================
-   HEART DIVIDER
-   ========================================== */
 .heart-divider {
     display: flex;
     flex-direction: column;
@@ -694,9 +652,6 @@ body {
     z-index: 1;
 }
 
-/* ==========================================
-   TOGETHER COUNTER
-   ========================================== */
 .together-counter {
     flex: 1 1 100%;
     display: flex;
@@ -756,9 +711,6 @@ body {
     background: linear-gradient(180deg, transparent, rgba(200, 130, 255, 0.25), transparent);
 }
 
-/* ==========================================
-   MUSIC PLAYER (FLOATING CARD)
-   ========================================== */
 .music-player {
     position: fixed;
     bottom: 30px;
@@ -838,7 +790,6 @@ body {
     box-shadow: 0 4px 12px rgba(200, 130, 255, 0.3);
 }
 
-/* Animations */
 .music-player {
     animation: slideUpCard 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards;
     opacity: 0;
@@ -852,9 +803,6 @@ body {
     }
 }
 
-/* ==========================================
-   ANIMATIONS
-   ========================================== */
 .profile-card {
     animation: cardFadeIn 0.8s ease-out forwards;
     opacity: 0;
@@ -888,9 +836,6 @@ body {
     to { opacity: 1; }
 }
 
-/* ==========================================
-   RESPONSIVE
-   ========================================== */
 @media (hover: none) {
     .profile-card:hover {
         transform: none;
@@ -1232,9 +1177,6 @@ body {
     }
 }
 
-/* ==========================================
-   SCROLLBAR
-   ========================================== */
 ::-webkit-scrollbar {
     width: 6px;
 }
@@ -1252,9 +1194,6 @@ body {
     background: rgba(200, 130, 255, 0.35);
 }
 
-/* ==========================================
-   SELECTION
-   ========================================== */
 ::selection {
     background: rgba(200, 130, 255, 0.3);
     color: white;
