@@ -251,21 +251,24 @@ let musicPlayerInstance;
 
 function onYouTubeIframeAPIReady() {
     ytPlayer = new YT.Player('youtubePlayer', {
-        height: '0',
-        width: '0',
+        height: '1',
+        width: '1',
         videoId: PLAYLIST[0].youtubeId,
+        host: 'https://www.youtube.com',
         playerVars: {
-            'autoplay': 1,
-            'controls': 0,
-            'disablekb': 1,
-            'fs': 0,
-            'rel': 0,
-            'loop': 1,
-            'playlist': PLAYLIST[0].youtubeId
+            autoplay: 0,
+            controls: 0,
+            disablekb: 1,
+            fs: 0,
+            rel: 0,
+            loop: 1,
+            playlist: PLAYLIST[0].youtubeId,
+            enablejsapi: 1,
+            origin: window.location.origin
         },
         events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
+            onReady: onPlayerReady,
+            onStateChange: onPlayerStateChange
         }
     });
 }
@@ -457,7 +460,36 @@ function initTogetherCounter() {
     setInterval(renderTogetherCounter, 1000);
 }
 
+function initInspectGuard() {
+    const blockEvent = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        return false;
+    };
+
+    document.addEventListener('contextmenu', blockEvent, { capture: true });
+    document.addEventListener('selectstart', blockEvent, { capture: true });
+    document.addEventListener('dragstart', blockEvent, { capture: true });
+
+    document.addEventListener('keydown', (event) => {
+        const code = event.code;
+        const ctrl = event.ctrlKey || event.metaKey;
+        const shift = event.shiftKey;
+        const blocked =
+            code === 'F12' ||
+            code === 'F11' ||
+            (ctrl && shift && ['KeyI', 'KeyJ', 'KeyC', 'KeyK'].includes(code)) ||
+            (ctrl && !shift && ['KeyU', 'KeyS'].includes(code));
+
+        if (blocked) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+    }, { capture: true });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    initInspectGuard();
     createParticles();
     initCursorGlow();
     initCardTilt();

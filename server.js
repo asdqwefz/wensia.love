@@ -369,7 +369,9 @@ const server = http.createServer(async (req, res) => {
         '.jpg': 'image/jpeg',
         '.gif': 'image/gif',
         '.mp3': 'audio/mpeg',
-        '.webp': 'image/webp'
+        '.webp': 'image/webp',
+        '.svg': 'image/svg+xml',
+        '.ico': 'image/x-icon'
     };
 
     fs.readFile(filePath, (err, content) => {
